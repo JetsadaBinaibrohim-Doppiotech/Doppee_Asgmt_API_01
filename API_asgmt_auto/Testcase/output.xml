@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2 (Python 3.9.1 on win32)" generated="2025-02-16T18:04:03.911754" rpa="false" schemaversion="5">
+<suite id="s1" name="Tc" source="C:\Users\jetsada.b\Desktop\API_asgmt_auto\Testcase\tc.robot">
+<test id="s1-t1" name="TC-001 Verify when input wrong username or password, API should return error" line="5">
+<kw name="Verify User Input Invalid data Should Return Error" owner="tc01_feature">
+<kw name="Login With Invalid Data" owner="logintoken_keyword">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:04:04.058994" level="INFO">Creating Session using : alias=loginSession, url=http://localhost:8082, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>loginSession</arg>
+<arg>http://localhost:8082</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-16T18:04:04.058994" elapsed="0.000000"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-16T18:04:04.059994" level="INFO">${request_body} = {'username': 'Invaliduser', 'password': 'Invalidpass'}</msg>
+<var>${request_body}</var>
+<arg>username=Invaliduser</arg>
+<arg>password=Invalidpass</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.059994" elapsed="0.000000"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-16T18:04:04.068987" level="INFO">POST Request : url=http://localhost:8082/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '54', 'Content-Type': 'application/json'} 
+ body=b'{"username": "Invaliduser", "password": "Invalidpass"}' 
+ </msg>
+<msg time="2025-02-16T18:04:04.068987" level="INFO">POST Response : url=http://localhost:8082/login 
+ status=401, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Sun, 16 Feb 2025 11:04:04 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"status":"error","message":"invalid username or password"} 
+ </msg>
+<msg time="2025-02-16T18:04:04.068987" level="INFO">${post_resp} = &lt;Response [401]&gt;</msg>
+<var>${post_resp}</var>
+<arg>loginSession</arg>
+<arg>/login</arg>
+<arg>json=${request_body}</arg>
+<arg>expected_status=401</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.059994" elapsed="0.008993"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-02-16T18:04:04.071003" level="INFO">${status} = error</msg>
+<var>${status}</var>
+<arg>${post_resp.json()['status']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.069982" elapsed="0.001021"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-02-16T18:04:04.071003" level="INFO">${message} = invalid username or password</msg>
+<var>${message}</var>
+<arg>${post_resp.json()['message']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.071003" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${post_resp.json()['status']}</arg>
+<arg>error</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.071003" elapsed="0.001000"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${post_resp.json()['message']}</arg>
+<arg>invalid username or password</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.072003" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>.</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.072003" elapsed="0.001002"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Invalid 🔴</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.073005" elapsed="0.000973"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>HTTP code : ${post_resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.073978" elapsed="0.000998"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Status : ${status}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.074976" elapsed="0.001002"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Message : ${message}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-16T18:04:04.075978" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:04:04.058994" elapsed="0.016984"/>
+</kw>
+<status status="PASS" start="2025-02-16T18:04:04.057994" elapsed="0.017984"/>
+</kw>
+<tag>InvalidData</tag>
+<status status="PASS" start="2025-02-16T18:04:04.056982" elapsed="0.018996"/>
+</test>
+<status status="PASS" start="2025-02-16T18:04:03.913754" elapsed="0.163222"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">InvalidData</stat>
+</tag>
+<suite>
+<stat name="Tc" id="s1" pass="1" fail="0" skip="0">Tc</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
