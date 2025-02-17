@@ -1,6 +1,6 @@
 ***Keywords***
 Get Assets List Data With Token
-    Create Session          GetAssets               http://localhost:8082
+    Create Session          GetAssets               ${url}
     ${token}=               Login To Get Token
     ${token_headers}=       Create Dictionary       token=${token}
     ${get_resp}=            GET On Session          GetAssets   /assets     headers=${token_headers}    expected_status=200
@@ -12,9 +12,9 @@ Get Assets List Data With Token
     Log To Console          Assets Data = ${count}
 
 Get Assets List Data No Token
-    Create Session          GetAssets                 http://localhost:8082
+    Create Session          GetAssets                 ${url}
     ${token}=               Login To Get Token  
-    ${invalid_token}        Set Variable              OUR-tpwqBH7I9W1xJ5QeIn-WV_uVYolC
+    ${invalid_token}        Set Variable              ${old_token}
     ${invalid_headers}      Create Dictionary         token=${invalid_token}
     ${get_resp}=            GET On Session            GetAssets    /assets     headers=${invalid_headers}    expected_status=401
     ${token}=               Set Variable              ${get_resp.json()['message']}

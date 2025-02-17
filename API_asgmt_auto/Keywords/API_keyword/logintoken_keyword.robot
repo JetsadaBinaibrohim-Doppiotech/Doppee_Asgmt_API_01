@@ -1,7 +1,7 @@
 ***Keywords***
 Login With Invalid Data
-    Create Session      loginSession                http://localhost:8082
-    ${request_body}=    Create Dictionary           username=Invaliduser  password=Invalidpass
+    Create Session      loginSession                ${url}
+    ${request_body}=    Create Dictionary           username=${invalid_username}  password=${invalid_password}
     ${post_resp}=       POST On Session             loginSession    /login      json=${request_body}    expected_status=401
     ${status}=          Set Variable                ${post_resp.json()['status']} 
     ${message}=         Set Variable                ${post_resp.json()['message']}
@@ -14,7 +14,7 @@ Login With Invalid Data
     Log to console      Message : ${message}
 
 Login With Valid Data
-    Create Session          loginSession                http://localhost:8082
+    Create Session          loginSession                ${url}
     ${token}=               Login To Get Token
     Should Be Equal         ${response.json()['status']}    success
     Should Be Equal         ${response.json()['message']}   ${token}
