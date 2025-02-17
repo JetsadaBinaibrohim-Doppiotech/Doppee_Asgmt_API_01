@@ -1,9 +1,9 @@
 ***Keywords***
 Modify Assets With Token    
-    Create Session          ModifyAssets               http://localhost:8082
+    Create Session          ModifyAssets            ${url}
     ${token}=               Login To Get Token
     ${token_headers}=       Create Dictionary       token=${token}
-    ${request_body}=        Create Dictionary       assetId=ar67     assetName=Smart Robot      assetType=9    inUse=true
+    ${request_body}=        Create Dictionary       assetId=${asst_id}     assetName=${asst_name}      assetType=${asst_type}    inUse=${in_use}
     ${put_resp}=            PUT On Session          ModifyAssets   /assets          headers=${token_headers}     json=${request_body}     expected_status=200
     ${status}=              Set Variable            ${put_resp.json()['status']} 
     ${message}=             Set Variable            ${put_resp.json()['message']}

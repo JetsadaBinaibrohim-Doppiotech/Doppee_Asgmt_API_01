@@ -1,10 +1,10 @@
 ***Keywords***
 Created New Assets With Token
-    Create Session          CreateAssets            http://localhost:8082
+    Create Session          CreateAssets            ${url}
     ${token}=               Login To Get Token
     ${token_headers}=       Create Dictionary       token=${token}
-    ${random_number}=       Evaluate                random.randint(10,100)          modules=random
-    ${request_body}=        Create Dictionary       assetId=ar${random_number}      assetName=Smart Robot       assetType=9     inUse=true
+    ${random_number}=       Evaluate                random.randint(0,9)          modules=random
+    ${request_body}=        Create Dictionary       assetId=${gen_create_new}${random_number}      assetName=${asst_name}   assetType=${asst_type}     inUse=${in_use}
     ${post_resp}=           POST On Session         CreateAssets   /assets          headers=${token_headers}     json=${request_body}     expected_status=200
     ${status}=              Set Variable            ${post_resp.json()['status']} 
     ${message}=             Set Variable            ${post_resp.json()['message']}
@@ -17,10 +17,10 @@ Created New Assets With Token
     RETURN                  ${request_body}
 
 Created New Assets With Duplicated ID 
-    Create Session          CreateAssets            http://localhost:8082
+    Create Session          CreateAssets            ${url}
     ${token}=               Login To Get Token
     ${token_headers}=       Create Dictionary       token=${token}
-    ${request_body}=        Create Dictionary       assetId=a001     assetName=Macbook Pro      assetType=1    inUse=true
+    ${request_body}=        Create Dictionary       assetId=${asst_id}     assetName=${asst_name}   assetType=${asst_type}     inUse=${in_use}
     ${post_resp}=           POST On Session         CreateAssets   /assets          headers=${token_headers}     json=${request_body}     expected_status=200
     ${status}=              Set Variable            ${post_resp.json()['status']} 
     ${message}=             Set Variable            ${post_resp.json()['message']}

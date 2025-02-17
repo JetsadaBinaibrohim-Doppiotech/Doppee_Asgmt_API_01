@@ -1,0 +1,15 @@
+#General Data
+url : "http://localhost:8082"
+user_name : "doppio"
+pass_word : "weBuildBestQa"
+invalid_username : "doppio1122"
+invalid_password : "doppiotech"
+#Data Assets
+invalid_id : "unknow"
+gen_create_new : "a00"
+asst_id_delete : "a001"
+asst_id : "a006"
+asst_name : "Smart Robot"
+asst_type : "4"
+in_use : "true"
+old_token : "OUR-tpwqBH7I9W1xJ5QeIn-WV_uVYolC"

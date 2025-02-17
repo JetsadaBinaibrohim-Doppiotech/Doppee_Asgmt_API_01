@@ -2,6 +2,8 @@
 Library     RequestsLibrary
 Library     Collections
 
+Variables   ./Resource/Testdata.yaml
+
 
 Resource    ./Keywords/API_keyword/createasset_keyword.robot
 Resource    ./Keywords/API_keyword/delete_keyword.robot

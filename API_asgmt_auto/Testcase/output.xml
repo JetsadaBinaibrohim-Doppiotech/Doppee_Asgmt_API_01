@@ -1,110 +1,288 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2 (Python 3.9.1 on win32)" generated="2025-02-16T18:04:03.911754" rpa="false" schemaversion="5">
-<suite id="s1" name="Tc" source="C:\Users\jetsada.b\Desktop\API_asgmt_auto\Testcase\tc.robot">
-<test id="s1-t1" name="TC-001 Verify when input wrong username or password, API should return error" line="5">
-<kw name="Verify User Input Invalid data Should Return Error" owner="tc01_feature">
-<kw name="Login With Invalid Data" owner="logintoken_keyword">
+<robot generator="Robot 7.2 (Python 3.9.1 on win32)" generated="2025-02-17T10:30:54.350690" rpa="false" schemaversion="5">
+<suite id="s1" name="Tc" source="C:\Users\jetsada.b\Desktop\GitHub\Doppee_Asgmt_API_01\API_asgmt_auto\Testcase\tc.robot">
+<test id="s1-t1" name="TC-007 Verify that delete asset API can work correctly" line="23">
+<kw name="Verify User Can Delete Asset Correctly" owner="tc07_feature">
+<kw name="Delete Assets With AssetID" owner="delete_keyword">
 <kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-02-16T18:04:04.058994" level="INFO">Creating Session using : alias=loginSession, url=http://localhost:8082, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>loginSession</arg>
-<arg>http://localhost:8082</arg>
+<msg time="2025-02-17T10:30:54.505234" level="INFO">Creating Session using : alias=DeleteAssets, url=http://localhost:8082, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>DeleteAssets</arg>
+<arg>${url}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-02-16T18:04:04.058994" elapsed="0.000000"/>
+<status status="PASS" start="2025-02-17T10:30:54.505234" elapsed="0.000000"/>
+</kw>
+<kw name="Login To Get Token" owner="common_keyword">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-17T10:30:54.506246" level="INFO">Creating Session using : alias=LoginForToken, url=http://localhost:8082, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>LoginForToken</arg>
+<arg>${url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-17T10:30:54.505234" elapsed="0.001012"/>
 </kw>
 <kw name="Create Dictionary" owner="BuiltIn">
-<msg time="2025-02-16T18:04:04.059994" level="INFO">${request_body} = {'username': 'Invaliduser', 'password': 'Invalidpass'}</msg>
+<msg time="2025-02-17T10:30:54.506246" level="INFO">${request_body} = {'username': 'doppio', 'password': 'weBuildBestQa'}</msg>
 <var>${request_body}</var>
-<arg>username=Invaliduser</arg>
-<arg>password=Invalidpass</arg>
+<arg>username=${user_name}</arg>
+<arg>password=${pass_word}</arg>
 <doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.059994" elapsed="0.000000"/>
+<status status="PASS" start="2025-02-17T10:30:54.506246" elapsed="0.000000"/>
 </kw>
 <kw name="POST On Session" owner="RequestsLibrary">
-<msg time="2025-02-16T18:04:04.068987" level="INFO">POST Request : url=http://localhost:8082/login 
+<msg time="2025-02-17T10:30:54.516594" level="INFO">POST Request : url=http://localhost:8082/login 
  path_url=/login 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '54', 'Content-Type': 'application/json'} 
- body=b'{"username": "Invaliduser", "password": "Invalidpass"}' 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "doppio", "password": "weBuildBestQa"}' 
  </msg>
-<msg time="2025-02-16T18:04:04.068987" level="INFO">POST Response : url=http://localhost:8082/login 
- status=401, reason= 
- headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Sun, 16 Feb 2025 11:04:04 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
- body={"status":"error","message":"invalid username or password"} 
+<msg time="2025-02-17T10:30:54.516594" level="INFO">POST Response : url=http://localhost:8082/login 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Mon, 17 Feb 2025 03:30:54 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"status":"success","message":"ezY_MiaQlxhWXLoBNK4TZ64R8CskROPU"} 
  </msg>
-<msg time="2025-02-16T18:04:04.068987" level="INFO">${post_resp} = &lt;Response [401]&gt;</msg>
-<var>${post_resp}</var>
-<arg>loginSession</arg>
+<msg time="2025-02-17T10:30:54.516594" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>LoginForToken</arg>
 <arg>/login</arg>
 <arg>json=${request_body}</arg>
-<arg>expected_status=401</arg>
+<arg>expected_status=200</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.059994" elapsed="0.008993"/>
+<status status="PASS" start="2025-02-17T10:30:54.506246" elapsed="0.010348"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-02-16T18:04:04.071003" level="INFO">${status} = error</msg>
+<msg time="2025-02-17T10:30:54.517600" level="INFO">${token} = ezY_MiaQlxhWXLoBNK4TZ64R8CskROPU</msg>
+<var>${token}</var>
+<arg>${response.json()['message']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.516594" elapsed="0.001006"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="PASS" start="2025-02-17T10:30:54.517600" elapsed="0.000000"/>
+</return>
+<msg time="2025-02-17T10:30:54.517600" level="INFO">${token} = ezY_MiaQlxhWXLoBNK4TZ64R8CskROPU</msg>
+<var>${token}</var>
+<status status="PASS" start="2025-02-17T10:30:54.505234" elapsed="0.012366"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-17T10:30:54.518612" level="INFO">${token_headers} = {'token': 'ezY_MiaQlxhWXLoBNK4TZ64R8CskROPU'}</msg>
+<var>${token_headers}</var>
+<arg>token=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.517600" elapsed="0.001012"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-17T10:30:54.518612" level="INFO">${request_body} = {'assetId': 'a001', 'assetName': 'Smart Robot', 'assetType': '4', 'inUse': 'true'}</msg>
+<var>${request_body}</var>
+<arg>assetId=${asst_id_delete}</arg>
+<arg>assetName=${asst_name}</arg>
+<arg>assetType=${asst_type}</arg>
+<arg>inUse=${in_use}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.518612" elapsed="0.000000"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-02-17T10:30:54.525595" level="INFO">DELETE Request : url=http://localhost:8082/assets/a001 
+ path_url=/assets/a001 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'token': 'ezY_MiaQlxhWXLoBNK4TZ64R8CskROPU', 'Content-Length': '82', 'Content-Type': 'application/json'} 
+ body=b'{"assetId": "a001", "assetName": "Smart Robot", "assetType": "4", "inUse": "true"}' 
+ </msg>
+<msg time="2025-02-17T10:30:54.525595" level="INFO">DELETE Response : url=http://localhost:8082/assets/a001 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Mon, 17 Feb 2025 03:30:54 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"status":"success","message":""} 
+ </msg>
+<msg time="2025-02-17T10:30:54.526603" level="INFO">${del_resp} = &lt;Response [200]&gt;</msg>
+<var>${del_resp}</var>
+<arg>DeleteAssets</arg>
+<arg>/assets/${asst_id_delete}</arg>
+<arg>headers=${token_headers}</arg>
+<arg>json=${request_body}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.518612" elapsed="0.007991"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-02-17T10:30:54.526603" level="INFO">${status} = success</msg>
 <var>${status}</var>
-<arg>${post_resp.json()['status']}</arg>
+<arg>${del_resp.json()['status']}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.069982" elapsed="0.001021"/>
+<status status="PASS" start="2025-02-17T10:30:54.526603" elapsed="0.000000"/>
 </kw>
 <kw name="Set Variable" owner="BuiltIn">
-<msg time="2025-02-16T18:04:04.071003" level="INFO">${message} = invalid username or password</msg>
+<msg time="2025-02-17T10:30:54.527600" level="INFO">${message} = </msg>
 <var>${message}</var>
-<arg>${post_resp.json()['message']}</arg>
+<arg>${del_resp.json()['message']}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.071003" elapsed="0.000000"/>
+<status status="PASS" start="2025-02-17T10:30:54.527600" elapsed="0.000000"/>
 </kw>
 <kw name="Should Be Equal" owner="BuiltIn">
-<arg>${post_resp.json()['status']}</arg>
-<arg>error</arg>
+<arg>${del_resp.json()['status']}</arg>
+<arg>success</arg>
 <doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.071003" elapsed="0.001000"/>
-</kw>
-<kw name="Should Be Equal" owner="BuiltIn">
-<arg>${post_resp.json()['message']}</arg>
-<arg>invalid username or password</arg>
-<doc>Fails if the given objects are unequal.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.072003" elapsed="0.000000"/>
+<status status="PASS" start="2025-02-17T10:30:54.527600" elapsed="0.000999"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>.</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.072003" elapsed="0.001002"/>
+<status status="PASS" start="2025-02-17T10:30:54.529597" elapsed="0.000000"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
-<arg>Invalid 🔴</arg>
+<arg>Valid 🟢</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.073005" elapsed="0.000973"/>
+<status status="PASS" start="2025-02-17T10:30:54.530602" elapsed="0.000000"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
-<arg>HTTP code : ${post_resp}</arg>
+<arg>HTTP code : ${del_resp}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.073978" elapsed="0.000998"/>
+<status status="PASS" start="2025-02-17T10:30:54.531606" elapsed="0.000000"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
 <arg>Status : ${status}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.074976" elapsed="0.001002"/>
+<status status="PASS" start="2025-02-17T10:30:54.531606" elapsed="0.000998"/>
 </kw>
 <kw name="Log To Console" owner="BuiltIn">
-<arg>Message : ${message}</arg>
+<arg>Message : ${message} ""</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-02-16T18:04:04.075978" elapsed="0.000000"/>
+<status status="PASS" start="2025-02-17T10:30:54.532604" elapsed="0.000990"/>
 </kw>
-<status status="PASS" start="2025-02-16T18:04:04.058994" elapsed="0.016984"/>
+<status status="PASS" start="2025-02-17T10:30:54.504234" elapsed="0.029360"/>
 </kw>
-<status status="PASS" start="2025-02-16T18:04:04.057994" elapsed="0.017984"/>
+<kw name="Get Assets List Data With Token" owner="getasset_keyword">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-17T10:30:54.534602" level="INFO">Creating Session using : alias=GetAssets, url=http://localhost:8082, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>GetAssets</arg>
+<arg>${url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-17T10:30:54.533594" elapsed="0.001008"/>
 </kw>
-<tag>InvalidData</tag>
-<status status="PASS" start="2025-02-16T18:04:04.056982" elapsed="0.018996"/>
+<kw name="Login To Get Token" owner="common_keyword">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-02-17T10:30:54.534602" level="INFO">Creating Session using : alias=LoginForToken, url=http://localhost:8082, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>LoginForToken</arg>
+<arg>${url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-02-17T10:30:54.534602" elapsed="0.000998"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-17T10:30:54.536612" level="INFO">${request_body} = {'username': 'doppio', 'password': 'weBuildBestQa'}</msg>
+<var>${request_body}</var>
+<arg>username=${user_name}</arg>
+<arg>password=${pass_word}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.535600" elapsed="0.001012"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-02-17T10:30:54.540608" level="INFO">POST Request : url=http://localhost:8082/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '51', 'Content-Type': 'application/json'} 
+ body=b'{"username": "doppio", "password": "weBuildBestQa"}' 
+ </msg>
+<msg time="2025-02-17T10:30:54.541604" level="INFO">POST Response : url=http://localhost:8082/login 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Mon, 17 Feb 2025 03:30:54 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body={"status":"success","message":"at77O-1DrabyKk_ppfJjF0KmDasHJOTA"} 
+ </msg>
+<msg time="2025-02-17T10:30:54.541604" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>LoginForToken</arg>
+<arg>/login</arg>
+<arg>json=${request_body}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.536612" elapsed="0.004992"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-02-17T10:30:54.541604" level="INFO">${token} = at77O-1DrabyKk_ppfJjF0KmDasHJOTA</msg>
+<var>${token}</var>
+<arg>${response.json()['message']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.541604" elapsed="0.000000"/>
+</kw>
+<return>
+<value>${token}</value>
+<status status="PASS" start="2025-02-17T10:30:54.541604" elapsed="0.000996"/>
+</return>
+<msg time="2025-02-17T10:30:54.542600" level="INFO">${token} = at77O-1DrabyKk_ppfJjF0KmDasHJOTA</msg>
+<var>${token}</var>
+<status status="PASS" start="2025-02-17T10:30:54.534602" elapsed="0.007998"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-02-17T10:30:54.542600" level="INFO">${token_headers} = {'token': 'at77O-1DrabyKk_ppfJjF0KmDasHJOTA'}</msg>
+<var>${token_headers}</var>
+<arg>token=${token}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.542600" elapsed="0.000000"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-02-17T10:30:54.547597" level="INFO">GET Request : url=http://localhost:8082/assets 
+ path_url=/assets 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'token': 'at77O-1DrabyKk_ppfJjF0KmDasHJOTA'} 
+ body=None 
+ </msg>
+<msg time="2025-02-17T10:30:54.547597" level="INFO">GET Response : url=http://localhost:8082/assets 
+ status=200, reason= 
+ headers={'Content-Type': 'application/json', 'Transfer-Encoding': 'chunked', 'Date': 'Mon, 17 Feb 2025 03:30:54 GMT', 'Keep-Alive': 'timeout=60', 'Connection': 'keep-alive'} 
+ body=[{"assetId":"a002","assetName":"Lenovo B112","assetType":2,"inUse":true},{"assetId":"a003","assetName":"Apple Iphone 11","assetType":3,"inUse":true},{"assetId":"a004","assetName":"Macbook Air","assetType":1,"inUse":true},{"assetId":"a005","assetName":"Xiaomi Mi6","assetType":4,"inUse":true},{"assetId":"a000","assetName":"Smart Robot","assetType":4,"inUse":true},{"assetId":"a006","assetName":"Smart Robot","assetType":4,"inUse":true},{"assetId":"a008","assetName":"Smart Robot","assetType":4,"inUse":true}] 
+ </msg>
+<msg time="2025-02-17T10:30:54.548604" level="INFO">${get_resp} = &lt;Response [200]&gt;</msg>
+<var>${get_resp}</var>
+<arg>GetAssets</arg>
+<arg>/assets</arg>
+<arg>headers=${token_headers}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.542600" elapsed="0.006004"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-02-17T10:30:54.549600" level="INFO">Length is 7.</msg>
+<msg time="2025-02-17T10:30:54.549600" level="INFO">${count} = 7</msg>
+<var>${count}</var>
+<arg>${get_resp.json()}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.548604" elapsed="0.000996"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-02-17T10:30:54.549600" level="INFO">${morethanone} = True</msg>
+<var>${morethanone}</var>
+<arg>${count}&gt;0</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.549600" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${morethanone}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.549600" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Valid 🟢</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.550612" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>HTTP code : ${get_resp}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.550612" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Assets Data = ${count}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-02-17T10:30:54.551844" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2025-02-17T10:30:54.533594" elapsed="0.018250"/>
+</kw>
+<status status="PASS" start="2025-02-17T10:30:54.504234" elapsed="0.047610"/>
+</kw>
+<tag>DeleteAssets</tag>
+<status status="PASS" start="2025-02-17T10:30:54.503231" elapsed="0.049615"/>
 </test>
-<status status="PASS" start="2025-02-16T18:04:03.913754" elapsed="0.163222"/>
+<status status="PASS" start="2025-02-17T10:30:54.351700" elapsed="0.201146"/>
 </suite>
 <statistics>
 <total>
 <stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">InvalidData</stat>
+<stat pass="1" fail="0" skip="0">DeleteAssets</stat>
 </tag>
 <suite>
 <stat name="Tc" id="s1" pass="1" fail="0" skip="0">Tc</stat>
